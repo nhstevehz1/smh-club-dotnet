@@ -10,10 +10,12 @@ namespace SmhClub.Repository.IRepository
 {
     internal interface IRepository<T> where T : EntityBase
     {
-        Task CreateAsync(T entity);
+        Task AddAsync(T entity);
         Task DeleteAsync(T entity);
-        Task<T> GetByIdAsync(long id);
+        Task<T?> GetByIdAsync(long id);
         Task UpdateAsync(T entity);
-        IQueryable<T> GetAll(Expression<Func<T>>? expression = null);
+        IQueryable<T?> GetAll(Expression<Func<T, bool>>? expression = null);
+        Task<T?> GetFirstAsync(Expression<Func<T, bool>> expression);
+        IQueryable<T> Entities { get; }
     }
 }

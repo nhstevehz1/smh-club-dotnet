@@ -1,42 +1,60 @@
 ﻿using SmhClub.Repository.IRepository;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
 using SmhClub.Repository.Common;
+using SmhClub.Repository.Contexts;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Linq.Expressions;
+
 
 namespace SmhClub.Repository.Repository
 {
-
-
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        public Task CreateAsync(T entity)
+        private readonly SmhClubContext _context;
+
+        public Repository(SmhClubContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public IQueryable<T> Entities => _context.Set<T>();
+
+        public async Task AddAsync(T entity)
+        {
+            await _context.Set<T>().AddAsync(entity);
         }
 
         public Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            return Task.CompletedTask;
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T>>? expression = null)
+        public IQueryable<T?> GetAll(Expression<Func<T, bool>>? expression = null)
         {
-            throw new NotImplementedException();
+            var result = _context.Set<T>().AsNoTracking();
+            if (expression != null) {
+                result = result.Where(expression);
+            }
+
+            return result;
         }
 
-        public Task<T> GetByIdAsync(long id)
+        public async Task<T?> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+        public async Task<T?> GetFirstAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync(expression);
         }
 
         public Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            return Task.CompletedTask;
         }
     }
 }
