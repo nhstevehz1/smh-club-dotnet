@@ -7,10 +7,11 @@ namespace SmhClub.Repository
     {
         public static void ApplyConfigurations(this ModelBuilder builder)
         {
+            Console.WriteLine("Inside ApplyConfig");
+
             var types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces()
                 .Any(gi => gi.IsGenericType && gi.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))
                 .ToList();
-
       
             foreach (Type type in types)
             {
