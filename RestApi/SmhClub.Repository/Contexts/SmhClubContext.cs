@@ -7,6 +7,7 @@ namespace SmhClub.Repository.Contexts
 {
     public class SmhClubContext : DbContext
     {
+
         public DbSet<MemberEntity> Members { get; set;  }
         public DbSet<AddressEntity> Address { get; set; }
         public DbSet<EmailEntity> Emails { get; set; }
@@ -24,6 +25,11 @@ namespace SmhClub.Repository.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
             => optionsBuilder.UseSqlite($"Data Source={DbPath}");
-  
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurations();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

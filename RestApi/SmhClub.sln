@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmhClub", "RestApi\SmhClub.csproj", "{9C7C9198-CA2C-408D-A9B8-F880CD8E99D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmhClub", "SmhClub\SmhClub.csproj", "{9C7C9198-CA2C-408D-A9B8-F880CD8E99D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmhClub.Repository", "..\SmhClub.Repository\SmhClub.Repository.csproj", "{83CB950F-3C78-4774-A8D5-F7FB54DCE943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmhClub.Repository", "SmhClub.Repository\SmhClub.Repository.csproj", "{83CB950F-3C78-4774-A8D5-F7FB54DCE943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmhClub.Services", "..\SmhClub.Services\SmhClub.Services.csproj", "{BE20CB56-F290-4AFB-A941-D0FD320AB12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmhClub.Services", "SmhClub.Services\SmhClub.Services.csproj", "{BE20CB56-F290-4AFB-A941-D0FD320AB12E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
